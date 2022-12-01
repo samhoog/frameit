@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/frameit",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

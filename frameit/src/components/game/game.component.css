@@ -1,0 +1,33 @@
+.search-bar {
+  width: 30%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.background {
+  text-align: center;
+}
+
+.movie-image {
+  display: block;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+
+.play-again-button {
+  display: block;
+  margin: auto;
+  background-color: white;
+}
+
+.image-buttons {
+  background-color: white;
+  margin: 5px;
+}
+
+.wrong-guesses {
+  text-align: left;
+}

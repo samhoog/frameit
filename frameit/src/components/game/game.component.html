@@ -1,0 +1,26 @@
+<div class="background">
+  <img *ngIf="currentSelectedImage === 1" class="movie-image" [src]="currentMovie.img1">
+  <img *ngIf="currentSelectedImage === 2" class="movie-image" [src]="currentMovie.img2">
+  <img *ngIf="currentSelectedImage === 3" class="movie-image" [src]="currentMovie.img3">
+  <img *ngIf="currentSelectedImage === 4" class="movie-image" [src]="currentMovie.img4">
+  <img *ngIf="currentSelectedImage === 5" class="movie-image" [src]="currentMovie.img5">
+  <button mat-button *ngIf="currentImage >= 1" class="image-buttons" (click)="setSelectedImage(1)">1</button>
+  <button mat-button *ngIf=" currentImage>= 2" class="image-buttons" (click)="setSelectedImage(2)">2</button>
+  <button mat-button *ngIf="currentImage >= 3" class="image-buttons" (click)="setSelectedImage(3)">3</button>
+  <button mat-button *ngIf="currentImage >= 4" class="image-buttons" (click)="setSelectedImage(4)">4</button>
+  <button mat-button *ngIf="currentImage >= 5" class="image-buttons" (click)="setSelectedImage(5)">5</button>
+
+  <div class="search-wrapper">
+    <input *ngIf="!isCorrect && !lost" class="search-bar" type="text"
+      placeholder="Search for a movie or hit enter to skip" [(ngModel)]="searchedText" (keyup)="searchMovies()"
+      (keyup.enter)="checkAnswer()">
+    <div *ngFor="let title of filteredMovies" class="searched-movies">{{title}}</div>
+    <div *ngFor="let guess of wrongGuesses" class="wrong-guesses">{{guess}}</div>
+  </div>
+  <div *ngIf="isCorrect">You got it!</div>
+  <div *ngIf="lost">The answer was: {{currentMovie.title}}</div>
+  <button mat-button class="play-again-button" *ngIf="isCorrect || lost" (click)="loadNewMovie()">Play again?</button>
+
+</div>
+
+<!-- <div *ngFor="let title of movieTitles">{{title}}</div> -->
