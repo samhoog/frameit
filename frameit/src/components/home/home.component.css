@@ -29,4 +29,6 @@
 .slogan {
   display: block;
   margin: 5%;
+  font-size: 1.5rem;
+  font-family: 'Heebo', sans-serif;
 }

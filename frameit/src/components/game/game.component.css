@@ -3,10 +3,24 @@
   display: block;
   margin-right: auto;
   margin-left: auto;
+  padding: 5px;
+  margin-top: 5px;
 }
 
 .background {
   text-align: center;
+}
+
+.correct-answer1 {
+  margin: 10px;
+  font-size: 1rem;
+  color: gray;
+}
+
+.correct-answer2 {
+  margin: 10px;
+  font-size: 1.5rem;
+  color: black;
 }
 
 .movie-image {
@@ -14,7 +28,7 @@
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 .play-again-button {
@@ -26,8 +40,43 @@
 .image-buttons {
   background-color: white;
   margin: 5px;
+  margin-top: 10px;
 }
 
 .wrong-guesses {
   text-align: left;
+}
+
+.searched-movies {
+  background-color: white;
+  width: 30%;
+  border: none;
+}
+
+.about-button,
+.help-button {
+  background-color: lavender;
+  border: none;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.icon-wrapper {
+  text-align: right;
+  margin-right: 10px;
+}
+
+li {
+  display: block;
+  margin: 0px;
+  background-color: white;
+}
+
+ul {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  max-height: 200px;
+  overflow: auto;
+  padding-left: 0;
 }
