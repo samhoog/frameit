@@ -25,11 +25,10 @@
 
 .movie-image {
   display: block;
-  width: 50%;
-  max-height: 50%;
+  max-width: 45%;
+  max-height: 45%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2%;
 }
 
 .play-again-button {
