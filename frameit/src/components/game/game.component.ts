@@ -14,7 +14,7 @@ interface Movies { results: Results[] }
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent {
 
   movieArray: Movie[] = [];
   currentMovie: Movie = this.movieArray[0];
@@ -29,12 +29,15 @@ export class GameComponent implements OnInit {
   lost = false;
   data = [];
   allMovies: any[] = [];
+  guessesLeft = 5;
+  isLastGuess = false;
 
   constructor(public router: Router, private db: AngularFirestore, private dialogRef: MatDialog) {
     // Save all the movie data in movieArray
     this.db.collection<Movie>('movies').valueChanges().subscribe((res => {
       if (res) {
         this.movieArray = res;
+        this.shuffleArray();
         // load the first movie once you have all the data
         this.loadNewMovie();
         // save all the titles in seperate array for searching
@@ -46,6 +49,22 @@ export class GameComponent implements OnInit {
     }))
   }
 
+  /**
+   * Randomly shuffle the array so the movies are in a random order everytime
+   * https://dev.to/codebubb/how-to-shuffle-an-array-in-javascript-2ikj
+   */
+  shuffleArray(): void {
+    for (let i = this.movieArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = this.movieArray[i];
+      this.movieArray[i] = this.movieArray[j];
+      this.movieArray[j] = temp;
+    }
+  }
+
+  /**
+   * Get titles from top 250 movies from IMDB-API
+   */
   async fetchData() {
     // try getting the json data
     let data = []
@@ -57,7 +76,9 @@ export class GameComponent implements OnInit {
     } catch (err) {
       console.error('Fetch Error :-S', err);
     }
+    // extract all the titles and add it to the array of allMovies
     this.allMovies = data.map((movie: any) => movie['title']);
+    // if one of our movies isn't in the top 250, add it but avoid duplicates
     this.movieTitles.forEach(title => {
       if (!this.allMovies.includes(title)) {
         this.allMovies.push(title);
@@ -69,13 +90,14 @@ export class GameComponent implements OnInit {
    * Choose a new movie for another round
    */
   loadNewMovie(): void {
-    // Choose a random movie from the array of movies
     this.currentImage = 1;
     this.currentSelectedImage = 1;
     //this.currentMovie = this.movieArray[Math.floor(Math.random() * this.movieArray.length)];
     if (this.currentIndex === this.movieArray.length - 1) {
+      // if you're at the end of the array, go back to the first movie
       this.currentMovie = this.movieArray[0];
     } else {
+      // otherwise show the next movie in the array
       this.currentIndex++;
       this.currentMovie = this.movieArray[this.currentIndex];
     }
@@ -87,19 +109,30 @@ export class GameComponent implements OnInit {
    * Check to see if the user entered the correct answer
    */
   checkAnswer(): void {
+    if (this.guessesLeft == 2) {
+      this.isLastGuess = true;
+    } else {
+      this.guessesLeft--;
+    }
+    this.filteredMovies = [];
     // if they got the right answer
     if (this.searchedText.toLowerCase() === this.currentMovie.title.toLowerCase()) {
       // show the congrats element and clear the searched text
       this.isCorrect = true;
       this.searchedText = '';
-      this.filteredMovies = [];
       this.wrongGuesses = [];
       this.currentImage = 5;
+      this.guessesLeft = 5;
+      this.isLastGuess = false;
     } else {
+      // otherwise show the next image and save the wrong guess
       this.isCorrect = false;
-      this.wrongGuesses.push(this.searchedText);
+      if (this.searchedText == '') {
+        this.wrongGuesses.push("SKIPPED");
+      } else {
+        this.wrongGuesses.push(this.searchedText);
+      }
       this.nextImage();
-
     }
   }
 
@@ -111,6 +144,8 @@ export class GameComponent implements OnInit {
     if (this.currentImage === 5) {
       this.lost = true;
       this.wrongGuesses = [];
+      this.guessesLeft = 5;
+      this.isLastGuess = false;
     } else {
       this.currentImage++;
       this.currentSelectedImage = this.currentImage;
@@ -124,7 +159,6 @@ export class GameComponent implements OnInit {
     if (this.searchedText === "") {
       this.filteredMovies = [];
     } else {
-      //this.filteredMovies = this.movieTitles.filter((title) => title.toLowerCase().includes(this.searchedText.toLowerCase()));
       this.filteredMovies = this.allMovies.filter((title) => title.toLowerCase().includes(this.searchedText.toLowerCase()));
     }
   }
@@ -137,18 +171,26 @@ export class GameComponent implements OnInit {
     this.currentSelectedImage = index;
   }
 
+  /**
+   * When you click a button in the search bar, choose it as the answer
+   * @param clickedMovie - the movie title they clicked
+   */
   fillInMovie(clickedMovie: string): void {
     this.searchedText = clickedMovie;
     this.filteredMovies = [];
+    this.checkAnswer();
   }
 
-  ngOnInit(): void {
-  }
-
+  /**
+   * Open the about modal
+   */
   openAbout(): void {
     this.dialogRef.open(AboutComponent);
   }
 
+  /**
+   * Open the help modal
+   */
   openHelp(): void {
     this.dialogRef.open(HelpsComponent);
   }

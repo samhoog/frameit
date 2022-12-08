@@ -26,6 +26,7 @@
 .movie-image {
   display: block;
   width: 50%;
+  max-height: 50%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 2%;
@@ -43,8 +44,27 @@
   margin-top: 10px;
 }
 
-.wrong-guesses {
+.wrong-guesses-wrapper {
   text-align: left;
+  margin-left: 3%;
+}
+
+.wrong-guesses {
+  text-align: center;
+  border: 1px black solid;
+  background-color: white;
+  max-width: 15%;
+  margin-top: 3px;
+  border-radius: 5px;
+}
+
+.guess-label {
+  text-align: center;
+  color: black;
+  border: 1px solid black;
+  max-width: 15%;
+  margin-top: 3px;
+  border-radius: 5px;
 }
 
 .searched-movies {
