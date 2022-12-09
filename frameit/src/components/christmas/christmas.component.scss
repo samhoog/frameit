@@ -13,7 +13,9 @@
 
 html {
   background-color: #e94c3d;
-  background-image: url('../../assets/christmas_background.jpg');
+  background-image: url('../../assets/christmas_background2.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
 }
 
 .correct-answer1 {
@@ -26,6 +28,18 @@ html {
   margin: 10px;
   font-size: 1.5rem;
   color: black;
+}
+
+.answer-wrapper,
+.answer-wrapper2 {
+  background-color: white;
+  border: 1px solid black;
+  max-width: 15%;
+  border-radius: 5px;
+  padding: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3px;
 }
 
 .movie-image {
