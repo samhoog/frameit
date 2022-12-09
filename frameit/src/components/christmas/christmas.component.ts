@@ -11,11 +11,11 @@ interface Results { title: string }
 interface Movies { results: Results[] }
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  selector: 'app-christmas',
+  templateUrl: './christmas.component.html',
+  styleUrls: ['./christmas.component.scss']
 })
-export class GameComponent {
+export class ChristmasComponent {
 
   movieArray: Movie[] = [];
   currentMovie: Movie = this.movieArray[0];
@@ -32,10 +32,14 @@ export class GameComponent {
   allMovies: string[] = [];
   guessesLeft = 5;
   isLastGuess = false;
+  snowflakes = 20;
+  snowflakeArray = Array(this.snowflakes);
+  lights = 42;
+  lightArray = Array(this.lights);
 
   constructor(public router: Router, private db: AngularFirestore, private dialogRef: MatDialog, private movieData: MovieTitlesService) {
     // Save all the movie data in movieArray
-    this.db.collection<Movie>('movies').valueChanges().subscribe((res => {
+    this.db.collection<Movie>('christmas').valueChanges().subscribe((res => {
       if (res) {
         this.movieArray = res;
         this.shuffleArray();
@@ -45,6 +49,7 @@ export class GameComponent {
         this.movieArray.forEach(movie => {
           this.movieTitles.push(movie.title);
         })
+        console.log(res);
       }
       this.movieData.movieTitles$.subscribe(result => {
         this.allMovies = result;
@@ -53,6 +58,7 @@ export class GameComponent {
       this.movieTitles.forEach(title => {
         if (!this.allMovies.includes(title)) {
           this.allMovies.push(title);
+          console.log(title);
         }
       });
     }))
@@ -69,7 +75,6 @@ export class GameComponent {
       this.movieArray[i] = this.movieArray[j];
       this.movieArray[j] = temp;
     }
-    console.log(this.movieArray);
   }
 
   /**
@@ -78,7 +83,6 @@ export class GameComponent {
   loadNewMovie(): void {
     this.currentImage = 1;
     this.currentSelectedImage = 1;
-    console.log(this.currentIndex);
     //this.currentMovie = this.movieArray[Math.floor(Math.random() * this.movieArray.length)];
     if (this.currentIndex === this.movieArray.length - 1) {
       // if you're at the end of the array, go back to the first movie

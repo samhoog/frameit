@@ -1,3 +1,10 @@
+<html>
+<div *ngFor="let snowfake of snowflakeArray" class="snowflake">
+  ❅
+</div>
+<ul class="lightrope">
+  <li *ngFor="let light of lightArray"></li>
+</ul>
 <div class="background">
   <div class="icon-wrapper">
     <button matbutton (click)="openHelp()" class="help-button">
@@ -44,6 +51,8 @@
   <div *ngIf="lost" class="correct-answer1">THE ANSWER WAS:</div>
   <div *ngIf="lost" class="correct-answer2">{{currentMovie.title}}</div>
   <button mat-button class="play-again-button" *ngIf="isCorrect || lost" (click)="loadNewMovie()">Play again?</button>
+
 </div>
 
+</html>
 <!-- <div *ngFor="let title of movieTitles">{{title}}</div> -->

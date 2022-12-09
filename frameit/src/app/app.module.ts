@@ -20,6 +20,7 @@ import { HomeComponent } from 'src/components/home/home.component';
 import { GameComponent } from 'src/components/game/game.component';
 import { AboutComponent } from 'src/components/about/about.component';
 import { HelpsComponent } from 'src/components/helps/helps.component';
+import { ChristmasComponent } from 'src/components/christmas/christmas.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HelpsComponent } from 'src/components/helps/helps.component';
     HomeComponent,
     GameComponent,
     AboutComponent,
-    HelpsComponent
+    HelpsComponent,
+    ChristmasComponent
   ],
   imports: [
     BrowserModule,
