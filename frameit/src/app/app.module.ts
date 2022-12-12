@@ -21,6 +21,7 @@ import { GameComponent } from 'src/components/game/game.component';
 import { AboutComponent } from 'src/components/about/about.component';
 import { HelpsComponent } from 'src/components/helps/helps.component';
 import { ChristmasComponent } from 'src/components/christmas/christmas.component';
+import { ChristmasAboutComponent } from 'src/components/christmasabout/christmasabout.component';
 
 @NgModule({
   declarations: [

@@ -69,7 +69,6 @@ export class GameComponent {
       this.movieArray[i] = this.movieArray[j];
       this.movieArray[j] = temp;
     }
-    console.log(this.movieArray);
   }
 
   /**
@@ -78,7 +77,6 @@ export class GameComponent {
   loadNewMovie(): void {
     this.currentImage = 1;
     this.currentSelectedImage = 1;
-    console.log(this.currentIndex);
     //this.currentMovie = this.movieArray[Math.floor(Math.random() * this.movieArray.length)];
     if (this.currentIndex === this.movieArray.length - 1) {
       // if you're at the end of the array, go back to the first movie
@@ -104,7 +102,7 @@ export class GameComponent {
     }
     this.filteredMovies = [];
     // if they got the right answer
-    if (this.searchedText.toLowerCase() === this.currentMovie.title.toLowerCase()) {
+    if (this.searchedText.toLowerCase().trim() === this.currentMovie.title.toLowerCase()) {
       // show the congrats element and clear the searched text
       this.isCorrect = true;
       this.searchedText = '';
@@ -115,7 +113,7 @@ export class GameComponent {
     } else {
       // otherwise show the next image and save the wrong guess
       this.isCorrect = false;
-      if (this.searchedText == '') {
+      if (this.searchedText.trim() == '') {
         this.wrongGuesses.push("SKIPPED");
       } else {
         this.wrongGuesses.push(this.searchedText);
@@ -144,7 +142,7 @@ export class GameComponent {
    * Search the movieTitles array for the text the user has typed
    */
   searchMovies(): void {
-    if (this.searchedText === "") {
+    if (this.searchedText.trim() === "") {
       this.filteredMovies = [];
     } else {
       this.filteredMovies = this.allMovies.filter((title) => title.toLowerCase().includes(this.searchedText.toLowerCase()));

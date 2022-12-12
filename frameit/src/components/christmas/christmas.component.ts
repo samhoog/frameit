@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { AboutComponent } from '../about/about.component';
+import { ChristmasAboutComponent } from '../christmasabout/christmasabout.component';
 import { HelpsComponent } from '../helps/helps.component';
 import { MovieTitlesService } from 'src/app/services/movie-titles.service';
 
@@ -49,7 +49,6 @@ export class ChristmasComponent {
         this.movieArray.forEach(movie => {
           this.movieTitles.push(movie.title);
         })
-        console.log(res);
       }
       this.movieData.movieTitles$.subscribe(result => {
         this.allMovies = result;
@@ -58,7 +57,6 @@ export class ChristmasComponent {
       this.movieTitles.forEach(title => {
         if (!this.allMovies.includes(title)) {
           this.allMovies.push(title);
-          console.log(title);
         }
       });
     }))
@@ -108,7 +106,7 @@ export class ChristmasComponent {
     }
     this.filteredMovies = [];
     // if they got the right answer
-    if (this.searchedText.toLowerCase() === this.currentMovie.title.toLowerCase()) {
+    if (this.searchedText.toLowerCase().trim() === this.currentMovie.title.toLowerCase()) {
       // show the congrats element and clear the searched text
       this.isCorrect = true;
       this.searchedText = '';
@@ -119,10 +117,10 @@ export class ChristmasComponent {
     } else {
       // otherwise show the next image and save the wrong guess
       this.isCorrect = false;
-      if (this.searchedText == '') {
+      if (this.searchedText.trim() == '') {
         this.wrongGuesses.push("SKIPPED");
       } else {
-        this.wrongGuesses.push(this.searchedText);
+        this.wrongGuesses.push(this.searchedText.trim());
       }
       this.nextImage();
     }
@@ -177,7 +175,7 @@ export class ChristmasComponent {
    * Open the about modal
    */
   openAbout(): void {
-    this.dialogRef.open(AboutComponent);
+    this.dialogRef.open(ChristmasAboutComponent);
   }
 
   /**
