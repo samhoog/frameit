@@ -7,8 +7,6 @@ import { HelpsComponent } from '../helps/helps.component';
 import { MovieTitlesService } from 'src/app/services/movie-titles.service';
 
 interface Movie { title: string, img1: string, img2: string, img3: string, img4: string, img5: string }
-interface Results { title: string }
-interface Movies { results: Results[] }
 
 @Component({
   selector: 'app-christmas',
@@ -173,6 +171,7 @@ export class ChristmasComponent {
 
   /**
    * Open the about modal
+   * from: https://www.youtube.com/watch?v=FThtv9iorao
    */
   openAbout(): void {
     this.dialogRef.open(ChristmasAboutComponent);
@@ -180,6 +179,7 @@ export class ChristmasComponent {
 
   /**
    * Open the help modal
+   * from: https://www.youtube.com/watch?v=FThtv9iorao
    */
   openHelp(): void {
     this.dialogRef.open(HelpsComponent);

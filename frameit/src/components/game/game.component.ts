@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,8 +7,6 @@ import { HelpsComponent } from '../helps/helps.component';
 import { MovieTitlesService } from 'src/app/services/movie-titles.service';
 
 interface Movie { title: string, img1: string, img2: string, img3: string, img4: string, img5: string }
-interface Results { title: string }
-interface Movies { results: Results[] }
 
 @Component({
   selector: 'app-game',
@@ -169,6 +167,7 @@ export class GameComponent {
 
   /**
    * Open the about modal
+   * from: https://www.youtube.com/watch?v=FThtv9iorao
    */
   openAbout(): void {
     this.dialogRef.open(AboutComponent);
@@ -176,6 +175,7 @@ export class GameComponent {
 
   /**
    * Open the help modal
+   * from: https://www.youtube.com/watch?v=FThtv9iorao
    */
   openHelp(): void {
     this.dialogRef.open(HelpsComponent);
