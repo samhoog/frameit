@@ -28,6 +28,8 @@ export class ChristmasComponent {
   lost = false;
   data = [];
   allMovies: string[] = [];
+  allMovies1: string[] = [];
+  allMovies2: string[] = [];
   guessesLeft = 5;
   isLastGuess = false;
   snowflakes = 20;
@@ -49,14 +51,16 @@ export class ChristmasComponent {
         })
       }
       this.movieData.movieTitles$.subscribe(result => {
-        this.allMovies = result;
+        this.allMovies1 = result;
       });
       // if one of our movies isn't in the top 250, add it but avoid duplicates
       this.movieTitles.forEach(title => {
-        if (!this.allMovies.includes(title)) {
-          this.allMovies.push(title);
+        if (!this.allMovies1.includes(title)) {
+          this.allMovies2.push(title);
         }
       });
+      // really scuffed way to get them to all load at the same time, fixing a bug
+      this.allMovies = [...this.allMovies1, ...this.allMovies2];
     }))
   }
 
